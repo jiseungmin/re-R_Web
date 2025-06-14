@@ -1,4 +1,8 @@
+import connectDB from "@/app/database/db";
+
 export default function Home() {
+  connectDB()
+  console.log('1')
   return (
     <main style={{ padding: '2rem', textAlign: 'center' }}>
       <h1>Welcome to My Next.js App</h1>
