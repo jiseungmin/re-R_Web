@@ -1,0 +1,10 @@
+// components/main/index.ts
+export { default as Header } from "./header"
+export { default as Sidebar } from "./sidebar"
+export { default as Postexercise } from "./postexercise"
+export { default as UserInfo } from "./userinfo"
+export { default as Weekeval } from "./weekeval"
+export { default as Jointangle } from "./jointangle"
+export { default as Workout } from "./workout"
+export { default as Achievement } from "./achievement"
+export { default as DataExport } from "./dataexport"

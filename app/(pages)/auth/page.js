@@ -1,12 +1,15 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function LoginPage() {
+  const router = useRouter()
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-lg border-0">
@@ -23,6 +26,9 @@ export default function LoginPage() {
                 <SelectValue placeholder="기관을 선택하세요" />
               </SelectTrigger>
               <SelectContent>
+                {/* 기관 목록 옵션 예시 */}
+                <SelectItem value="hospital">병원</SelectItem>
+                <SelectItem value="clinic">의원</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -52,6 +58,7 @@ export default function LoginPage() {
           </div>
 
           <Button
+            onClick={() => router.push("/main")}
             className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md mt-8 transition-colors text-xl"
             size="lg"
           >
