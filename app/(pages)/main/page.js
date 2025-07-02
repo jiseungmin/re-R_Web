@@ -83,33 +83,6 @@ export default function Main() {
       {/* 상단 헤더 */}
       <Header userId="admin01" />
 
-      {/* 탭바 (이용정보 / 고객센터) */}
-      <div className="bg-white border-b border-gray-200 px-6 pt-3 pb-1">
-        <div className="flex space-x-8">
-          <Link
-            href="/main"
-            className={`text-sm font-medium ${
-              pathname === "/main"
-                ? "text-blue-600 border-b-2 border-blue-600 pb-1"
-                : "text-gray-500 hover:text-blue-600"
-            }`}
-          >
-            이용정보
-          </Link>
-
-          <Link
-            href="/support"
-            className={`text-sm font-medium ${
-              pathname === "/support"
-                ? "text-blue-600 border-b-2 border-blue-600 pb-1"
-                : "text-gray-500 hover:text-blue-600"
-            }`}
-          >
-            고객센터
-          </Link>
-        </div>
-      </div>
-
       {/* 메인 콘텐츠 */}
       <div className="flex h-[calc(100vh-48px)]">
         <Sidebar users={users} selectedUser={selectedUser} setSelectedUser={setSelectedUser} />

@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-
 export default function DataExport() {
   return (
     <Card className="bg-white border-gray-200 shadow-sm">
@@ -18,7 +17,7 @@ export default function DataExport() {
                       <div className="bg-slate-50 p-2 rounded-lg border border-slate-200">
                         <div className="text-xs font-medium mb-2">수집 항목</div>
                         <div className="grid grid-cols-2 gap-1 text-xs">
-                          {["회전정보", "주차평가", "각도측정", "근력운동", "상태평가", "분석데이터"].map(
+                          {["회전정보", "주차별 평가", "관절각도 증진 훈련", "근력 및 전신 운동", "운동 후 상태평가"].map(
                             (item, index) => (
                               <label key={index} className="flex items-center space-x-1">
                                 <input type="checkbox" className="w-3 h-3" defaultChecked={index < 3} />
@@ -31,11 +30,11 @@ export default function DataExport() {
 
                       <div className="grid grid-cols-2 gap-2">
                         <div>
-                          <label className="text-xs text-gray-600 mb-1 block">시작일</label>
+                          <label className="text-xs text-gray-600 mb-1 block">추출 기간 시작일</label>
                           <Input type="date" className="h-6 text-xs border-gray-300" />
                         </div>
                         <div>
-                          <label className="text-xs text-gray-600 mb-1 block">종료일</label>
+                          <label className="text-xs text-gray-600 mb-1 block">추출 기간 종료일</label>
                           <Input type="date" className="h-6 text-xs border-gray-300" />
                         </div>
                       </div>

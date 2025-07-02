@@ -16,7 +16,9 @@ export default function Header({ userId }) {
             <span className="font-medium text-sm">{userId}</span>
           </div>
           <span className="text-white/40">|</span>
+          <Link href="/auth">
           <button className="hover:bg-white/10 px-2 py-1 rounded text-sm">로그아웃</button>
+          </Link>
         </div>
 
         <div className="flex-1 max-w-md mx-6">
@@ -31,7 +33,10 @@ export default function Header({ userId }) {
 
         <div className="flex items-center space-x-3">
           <Link href="/main">
-            <button className="text-sm hover:bg-white/10 px-2 py-1 rounded">Home</button>
+            <button className="text-sm hover:bg-white/10 px-2 py-1 rounded">이용정보</button>
+          </Link>
+          <Link href="/support">
+            <button className="text-sm hover:bg-white/10 px-2 py-1 rounded">고객센터</button>
           </Link>
           {isAdmin && (
             <Link href="/admin">

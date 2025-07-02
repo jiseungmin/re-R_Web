@@ -1,40 +1,66 @@
-import {TrendingUp} from "lucide-react"
+"use client"
+import { TrendingUp } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
 
-export default function Achievement({users, selectedUser}) {
+export default function Achievement({ users, selectedUser }) {
+  const percent = users[selectedUser]?.progress ?? 0
+
   return (
     <Card className="bg-white border-gray-200 shadow-sm">
-    <CardHeader className="bg-[#4F6EFF] text-white p-3">
-      <CardTitle className="text-sm flex items-center space-x-1">
-        <TrendingUp className="w-4 h-4" />
-        <span>훈련 달성도</span>
-      </CardTitle>
-    </CardHeader>
-    <CardContent className="p-3">
-      <div className="flex items-center space-x-4">
-        <div className="relative">
-          <div className="w-16 h-16 rounded-full bg-[#4F6EFF] flex items-center justify-center">
-            <div className="text-sm font-bold text-white">{users[selectedUser].progress}%</div>
-          </div>
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-amber-400 rounded-full flex items-center justify-center text-xs">
-            🏆
+      <CardHeader className="bg-slate-700 text-white p-3 border-b border-gray-200">
+        <CardTitle className="text-sm flex items-center space-x-1">
+          <TrendingUp className="w-4 h-4" />
+          <span>훈련 달성도</span>
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent className="p-3 space-y-4">
+        {/* 주차 / 일차 선택 */}
+        <div className="flex items-center gap-2 text-sm">
+          <Select>
+            <SelectTrigger className="w-[70px] h-8 text-xs px-2 border">
+              <SelectValue placeholder="n" />
+            </SelectTrigger>
+            <SelectContent>
+              {[1, 2, 3, 4].map((n) => (
+                <SelectItem key={n} value={n.toString()}>{n}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <span>주차</span>
+
+          <Select>
+            <SelectTrigger className="w-[70px] h-8 text-xs px-2 border">
+              <SelectValue placeholder="n" />
+            </SelectTrigger>
+            <SelectContent>
+              {[1, 2, 3, 4, 5, 6, 7].map((n) => (
+                <SelectItem key={n} value={n.toString()}>{n}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <span>일차</span>
+        </div>
+
+        {/* 달성도 바 */}
+        <div className="text-sm border border-gray-300">
+          <div className="flex h-10">
+            <div className="w-[100px] flex items-center justify-center border-r border-gray-300 bg-white font-medium">
+              달성도
+            </div>
+            <div className="flex-1 relative bg-gray-100">
+              <div
+                className="absolute top-0 left-0 h-full bg-blue-300 transition-all"
+                style={{ width: `${percent}%` }}
+              />
+              <div className="relative z-10 flex items-center justify-center h-full text-black font-bold">
+                {percent}%
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex-1">
-          <div className="text-sm font-medium text-gray-800 mb-2">전체 달성도</div>
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            <div className="bg-emerald-50 p-2 rounded text-center border border-emerald-200">
-              <div className="text-gray-600">주간</div>
-              <div className="font-bold text-emerald-600">95%</div>
-            </div>
-            <div className="bg-slate-50 p-2 rounded text-center border border-slate-200">
-              <div className="text-gray-600">월간</div>
-              <div className="font-bold text-slate-600">82%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </CardContent>
-  </Card>
+      </CardContent>
+    </Card>
   )
 }
