@@ -1,12 +1,9 @@
 "use client"
 
-import Link from "next/link"
 import { useState } from "react"
-import { usePathname } from "next/navigation"
 import { Header, Sidebar, Postexercise, UserInfo, Weekeval, Jointangle, Workout, Achievement, DataExport} from "@/components/main"
 
 export default function Main() {
-  const pathname = usePathname()
   const [selectedUser, setSelectedUser] = useState(0)
 
   const users = [
