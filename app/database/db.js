@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
  * Hot reload 시 중복 연결을 방지하기 위해 캐시를 사용합니다.
  */
 const MONGODB_URI = process.env.MONGODB_URI || process.env.MONGO_URI;
-console.log('MONGODB_URI: ', MONGODB_URI)
 
 if (!MONGODB_URI) {
   throw new Error('⚠️ Please define the MONGODB_URI environment variable in .env.local');
@@ -29,7 +28,6 @@ async function connectDB() {
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
-      console.log(`✔️ MongoDB 연결 성공: ${mongooseInstance.connection.host}`);
       return mongooseInstance;
     });
   }
