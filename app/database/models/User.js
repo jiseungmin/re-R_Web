@@ -1,5 +1,6 @@
 // models/User.js
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
@@ -17,19 +18,8 @@ const UserSchema = new Schema({
   has_base_disease: { type: String, default: null },
   had_knee_surgery: { type: String, default: null },
   pre_surgery_rom: { type: String, default: null },
-  registered_at: { type: Date, default: Date.now, required: true },
+  surgery_date: { type: Date, default: null },
   updated_at: { type: Date, default: Date.now},
-});
-
-// 비밀번호 해싱
-UserSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-  }
-}, {
-  collection: 'users',
-  timestamps: { createdAt: 'registered_at', updatedAt: 'updated_at' }
 });
 
 module.exports = mongoose.models.User || mongoose.model('User', UserSchema, 'User');

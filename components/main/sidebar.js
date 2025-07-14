@@ -29,14 +29,6 @@ export default function Sidebar({ users, selectedUser, setSelectedUser }) {
 
   const hospitalId = "686d0480f3acacb39348df4f"
 
-  async function hashPassword(password) {
-    const encoder = new TextEncoder()
-    const data = encoder.encode(password)
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data)
-    const hashArray = Array.from(new Uint8Array(hashBuffer))
-    const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("")
-    return hashHex
-  }
 
   const handleCreate = async () => {
     if (!name || !gender || !doctor || !phone || !birth || phone.length < 10 || birth.length !== 8) {
@@ -61,11 +53,10 @@ export default function Sidebar({ users, selectedUser, setSelectedUser }) {
     const pw_randChars = Math.random().toString(36).slice(-3).toUpperCase()
     const password = `${birthMMDD}${phoneLast2}${pw_randChars}`
   
-    const hashedPassword = await hashPassword(password)
     
     try {
       const res = await axios.post("/api/auth/patient-id", {
-        ID: patientId, hashedPassword, name, gender,
+        ID: patientId, password, name, gender,
         phone, birth, hospitalId, doctor
       })
   

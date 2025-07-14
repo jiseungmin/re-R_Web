@@ -2,10 +2,11 @@
 import connectDB from '@/app/database/db';
 import { NextResponse } from 'next/server';
 import User from '@/app/database/models/User';
-import Healthcheck from '@/app/database/models/healthcheck';
+import healthcheck from '@/app/database/models/Healthcheck';
 
 export async function POST(request) {
   const { userId, paintest, feartest, max_angle } = await request.json();
+  console.log(userId, paintest, feartest, max_angle)
   if (!userId || !Array.isArray(paintest) || !feartest || typeof max_angle !== 'number') {
     return NextResponse.json(
       { success: false, message: 'userId, paintest, feartest, max_angle 모두 필요합니다.' },
@@ -24,7 +25,7 @@ export async function POST(request) {
   const entry = { paintest, feartest, max_angle };
 
   // 1) 오늘자 문서가 있으면 survey 배열에 push
-  const updated = await HealthCheck.findOneAndUpdate(
+  const updated = await healthcheck.findOneAndUpdate(
     { User: userId, createat: { $gte: start, $lte: end } },
     { $push: { survey: entry } },
     { new: true }
@@ -37,7 +38,7 @@ export async function POST(request) {
   }
 
   // 2) 오늘자 문서가 없으면 새로 생성
-  const created = await HealthCheck.create({
+  const created = await healthcheck.create({
     User:   userId,
     survey: [entry]
   });
@@ -45,7 +46,7 @@ export async function POST(request) {
   // → 생성 분기에만 User 문서 업데이트
   await User.findByIdAndUpdate(
     userId,
-    { $push: { HealthCheck: created._id } },
+    { $push: { healthcheck: created._id } },
     { new: true }
   );
 

@@ -2,14 +2,13 @@ import mongoose from 'mongoose'
 import connectDB from '@/app/database/db'
 import User from '@/app/database/models/User'
 import Hospital from '@/app/database/models/Hospital'
+import crypto from 'crypto';
 
 export async function POST(req) {
   try {
     const body = await req.json()
-    const { ID, hashedPassword, name, gender, phone, doctor, birth, hospitalId} = body
-    console.log('hashedPassword: ', hashedPassword)
-
-    if (!ID || !hashedPassword || !name || !gender || !phone || !doctor || !birth) {
+    const { ID, password, name, gender, phone, doctor, birth, hospitalId} = body
+    if (!ID || !password || !name || !gender || !phone || !doctor || !birth) {
       return new Response(JSON.stringify({ success: false, message: '입력값 누락' }), { status: 400 })
     }
 
@@ -24,19 +23,22 @@ export async function POST(req) {
         )
     }
 
+    const hash = crypto.createHash('sha256').update(password).digest('hex');
+
     const newUser = new User({
       ID,
-      password: hashedPassword,
+      password: hash,
       name,
       gender,
       phone,
       Doctor: doctor,
       birth,
       Hospital: new mongoose.Types.ObjectId(hospitalId),
-      registered_at: new Date().toISOString()
     })
 
     await newUser.save()
+
+    console.log('newUser: ')
 
     await Hospital.updateOne(
       { _id: new mongoose.Types.ObjectId(hospitalId) },

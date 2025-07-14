@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 // sub-schema
 const PaintTestSchema = new Schema({
+  section:{ type: String, required: true },
   title: { type: String, required: true },
   score: { type: Number, required: true }
 }, { _id: false });
