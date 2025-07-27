@@ -13,7 +13,7 @@ export async function POST(req) {
 
   try {
     await connectDB();
-    const user = await User.findOne({ ID: id });
+    const user = await User.findOne({ phone: id });
 
     if (!user) {
       return new Response(JSON.stringify({

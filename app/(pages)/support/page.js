@@ -28,7 +28,9 @@ export default function AdminPage() {
     async function load() {
       const res = await fetch("/api/post");
       const json = await res.json();
+      console.log('json', json)
       if (json.success) setPosts(json.data);
+
     }
     load();
   }, []);
@@ -60,7 +62,9 @@ export default function AdminPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: currentQuery._id, answer })
     });
+   
     const json = await res.json();
+    console.log('json: ', json)
     if (json.success) {
       // update local list
       setPosts(posts.map(p =>

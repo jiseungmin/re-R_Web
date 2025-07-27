@@ -9,14 +9,14 @@ const PaintTestSchema = new Schema({
 
 // Heat Test Subdocument Schema
 const HeatTestSchema = new Schema({
-  title: { type: String, required: true },
-  score: { type: String, required: true }
+  title: { type: String, default: ''},
+  score: { type: String, default: '' }
 }, { _id: false });
 
 // Swell Test Subdocument Schema
 const SwellTestSchema = new Schema({
-  title: { type: String, required: true },
-  score: { type: String, required: true }
+  title: { type: String, default: ''},
+  score: { type: String, default: ''}
 }, { _id: false });
 
 // Abnormal Signs Subdocument Schema
