@@ -25,9 +25,9 @@ const AbnormalSignsSchema = new Schema({
   selected:  { type: [String], default: [] }
 }, { _id: false });
 
-// Survey Entry Schema: 라운드별로 추가
+// Survey Entry Schema
 const SurveySchema = new Schema({
-  round:          { type: Number, required: true },        // 1차, 2차 등 구분
+  round:          { type: Number, required: true },       
   paintest:       { type: PaintTestSchema, required: true },
   heatTest:       { type: HeatTestSchema,   default: {} },
   swellTest:      { type: SwellTestSchema,  default: {} },
@@ -44,7 +44,6 @@ const PostEvalSessionSchema = new Schema({
   timestamps: { createdAt: 'createat', updatedAt: 'updateat' }
 });
 
-// 인덱스 설정: User + createat 범위 조회 효율화
 PostEvalSessionSchema.index(
   { User: 1, createat: 1 },
   { name: 'idx_user_createat' }

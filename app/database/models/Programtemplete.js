@@ -14,6 +14,4 @@ const ProgramtempleteSchema = new Schema(
   }
 );
 
-
-export default mongoose.models.Programtemplete 
-  || mongoose.model('Programtemplete', ProgramtempleteSchema, 'Programtemplete');
+export default mongoose.models.Programtemplete || mongoose.model('Programtemplete', ProgramtempleteSchema, 'Programtemplete');

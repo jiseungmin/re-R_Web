@@ -27,9 +27,7 @@ const ResultCommentSchema = new mongoose.Schema({
     medium: { type: String, required: true },
     low:    { type: String, required: true }
   }
-}, {
-  timestamps: true
-});
+}, { timestamps: true});
 
 module.exports = mongoose.models.ResultComment || mongoose.model('ResultComment', ResultCommentSchema, 'ResultComment');
 

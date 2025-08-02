@@ -1,21 +1,13 @@
 'use client';
-
+import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Plus, Edit3, X, RefreshCw } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/table';
-import axios from 'axios';
+import { Plus, Edit3, X, RefreshCw } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
 
 export default function FAQManagement() {
   // 1) FAQ 목록 & 정렬 순서
