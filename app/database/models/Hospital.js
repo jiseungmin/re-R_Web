@@ -8,6 +8,8 @@ const HospitalSchema = new mongoose.Schema({
   address:  { type: String, required: true },
   phone:    { type: String, required: true },
   doctors:  { type: [String], default: [] },
+  otp_secret: { type: String, required: true },
+  otpauth_url: { type: String, required: true },
   createat: { type: Date, default: Date.now },
   updateat: { type: Date, default: Date.now },
 });

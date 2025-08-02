@@ -1,4 +1,6 @@
+import QRCode from 'qrcode'
 import mongoose from 'mongoose'
+import speakeasy from 'speakeasy'
 import connectDB from '@/app/database/db'
 import Hospital from '@/app/database/models/Hospital'
 
@@ -29,16 +31,29 @@ export async function POST(req) {
       )
     }
 
-    // 5. 새로운 병원 문서 생성
-    await Hospital.create({ id, password, name, phone, address})
+    // 5. 2FA용 시크릿 생성 및 qrImage 생성
+    const secret = speakeasy.generateSecret({ name: `re-R (${id})` })
+    const qrImage = await QRCode.toDataURL(secret.otpauth_url)
 
-    // 6. 성공 응답 반환
+    // 6. 새로운 병원 문서 생성
+    await Hospital.create({ id, password, name, phone, address, otp_secret: secret.base32, otpauth_url: secret.otpauth_url})
+
+    // 7. 성공 응답 반환
     return new Response(
-      JSON.stringify({ success: true, message: '병원이 등록되었습니다.' }),
-      { status: 201, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({
+        success: true,
+        message: '병원이 등록되었습니다.',
+        qr: qrImage,
+        secret: secret.base32, 
+      }),
+      {
+        status: 201,
+        headers: { 'Content-Type': 'application/json' },
+      }
     )
 
   } catch (err) {
+    // 8. 성공 응답 반환
     console.error('등록 오류:', err)
     return new Response(
       JSON.stringify({ success: false, message: '서버 오류', error: err.message }),

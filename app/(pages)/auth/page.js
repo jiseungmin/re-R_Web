@@ -25,7 +25,7 @@ export default function LoginPage() {
   
       if (res.data.success) {
         alert("로그인 성공")
-        router.push("/main")
+        router.push(`/auth/twofa?Id=${id}`)
       } else {
         alert(res.data.message || "로그인 실패")
       }

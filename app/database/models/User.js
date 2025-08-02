@@ -1,6 +1,6 @@
 // models/User.js
-const { Schema } = mongoose;
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const UserSchema = new Schema({
   PostEvalSession: [{ type: Schema.Types.ObjectId, ref: 'PostEvalSession', required: true}],
